@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loginbtntxt">Login!</string>
+  <string name="emailprompt">email</string>
+  <string name="pwprompt">password</string>
+    <string name="ApplicationName">AndroidApp1</string>
+  <string name="loginerror">You username or password is incorrect. Try again!</string>
+</resources>
