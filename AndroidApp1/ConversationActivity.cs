@@ -13,31 +13,52 @@ using Android.Widget;
 namespace AndroidApp1
 {
     [Activity(Label = "Conversation")]
-    public class ConversationActivity : Activity
+    public class ConversationActivity : SecureBaseActivity
     {
+        private string _name;
+        private List<string> _messages;
+        private void renderView()
+        {
+            var layout = (LinearLayout)LayoutInflater.Inflate(Resource.Layout.Conversation, null);
+            foreach (var m in _messages)
+            {
+                var textView = new TextView(this);
+                textView.Text = m;
+                layout.AddView(textView);
+            }
+            SetContentView(layout);
+            var btn = FindViewById<Button>(Resource.Id.sendbutton);
+            btn.Click += delegate {
+                var message = (EditText)FindViewById(Resource.Id.newmessage);
+                var text = $"ME: {message.Text}";
+                TextView tv = new TextView(this);
+                tv.Text = text;
+                layout.AddView(tv);
+            };
+        }
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            //SetContentView(Resource.Layout.Conversation);
-            //var layout = FindViewById<LinearLayout>(Resource.Layout.Conversation);
-            var layout = (LinearLayout)LayoutInflater.Inflate(Resource.Layout.Conversation, null);
-            var name = Intent.GetStringExtra("SenderName");
 
-            var t1 = $"{name}: Hello from {name}!";
-            var t2 = "Me: Hi WTF you want?";
-            var t3 = $"{name}: To meet your momma";
-            var text1 = new TextView(this);
-            var text2 = new TextView(this);
-            var text3 = new TextView(this);
+            _name = Intent.GetStringExtra("SenderName");
+            _messages = new List<string>()
+            {
+                $"{_name}: Hello from {_name}!",
+                "Me: Hi WTF you want?",
+                $"{_name}: To meet your momma"
+            };
+            renderView();
             
-            text1.Text = t1;
-            text2.Text = t2;
-            text3.Text = t3;
-            layout.AddView(text1);
-            layout.AddView(text2);
-            layout.AddView(text3);
-            SetContentView(layout);
-            // Create your application here
+
+
+        }
+        public void SendMessageClick(object obj, EventArgs args)
+        {
+            
+            var message = (EditText)FindViewById(Resource.Id.newmessage);
+            var text = message.Text;
+            _messages.Add($"ME: {text}");
+            renderView();
         }
     }
 }

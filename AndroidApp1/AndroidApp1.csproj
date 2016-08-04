@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseActivity.cs" />
     <Compile Include="ConversationActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MessagesActivity.cs" />
@@ -63,6 +64,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Conversation.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\menu\menu.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

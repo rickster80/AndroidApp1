@@ -13,7 +13,7 @@ using Android.Widget;
 namespace AndroidApp1
 {
     [Activity(Label = "Messages")]
-    public class MessagesActivity : ListActivity
+    public class MessagesActivity : SecureBaseListActivity
     {
         Message[] _messages;
         protected override void OnCreate(Bundle savedInstanceState)
@@ -46,6 +46,7 @@ namespace AndroidApp1
             }
             return messages.OrderByDescending(m => m.DateSent).ToList();
         }
+
     }
 
     public class Message
